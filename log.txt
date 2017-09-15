@@ -1,0 +1,49 @@
+installing visual studio code
+choco install visualstudiocode
+
+installing vetur extension for vscode
+
+installing npm:
+choco install nodejs
+
+installing vue-cli and starting from vue-webpack-boilerplate
+https://github.com/vuejs-templates/webpack#readme
+npm install -g vue-cli
+
+PS C:\projects> vue init webpack learn-vue
+
+? Target directory exists. Continue? Yes
+? Project name learn-vue
+? Project description A Vue.js project
+? Author călin
+? Vue build runtime
+? Install vue-router? Yes
+? Use ESLint to lint your code? Yes
+? Pick an ESLint preset Standard
+? Setup unit tests with Karma + Mocha? Yes
+? Setup e2e tests with Nightwatch? Yes
+
+   vue-cli · Generated "learn-vue".
+
+   To get started:
+
+     cd learn-vue
+     npm install
+     npm run dev
+
+   Documentation can be found at https://vuejs-templates.github.io/webpack
+
+cd learn-vue
+npm install
+npm run dev
+
+=> a browser window opens pointing to the app
+
+changing message in src/components/hello.vue to test hotreload
+
+
+running the tests
+java's needed for the selenium driver
+choco install javaruntime
+
+npm test
