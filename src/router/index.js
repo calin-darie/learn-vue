@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Hello from '@/components/Hello'
+import Level from '@/memoryGame/Level'
 
 Vue.use(Router)
 
@@ -8,8 +8,9 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Hello',
-      component: Hello
+      name: 'Level',
+      component: Level,
+      props: (route) => ({ level: 1 })
     }
   ]
 })
