@@ -1,6 +1,6 @@
 <template>
   <div>
-    test level {{level}}: {{levelData.numberOfPairs}}
+    test level {{level}}
     <img class="card" v-for="card of levelData.cards" 
       :key="card.id" 
       :src="card.faceUp?card.face:card.back"
@@ -15,7 +15,7 @@ export default {
   props: ['level'],
   data () {
     return {
-      levelData: { deck: { cards: [], numberOfPairs: 0 } }
+      levelData: { cards: [] }
     }
   },
   watch: {
