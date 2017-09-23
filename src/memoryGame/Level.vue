@@ -1,7 +1,10 @@
 <template>
   <div>
     test level {{level}}: {{levelData.numberOfPairs}}
-    <img class="card" v-for="card of levelData.cards" :key="card.id" :src="card.faceUp?card.face:card.back" />
+    <img class="card" v-for="card of levelData.cards" 
+      :key="card.id" 
+      :src="card.faceUp?card.face:card.back"
+      @click="flipCard(card.id)" />
   </div>
 </template>
 
@@ -23,6 +26,13 @@ export default {
           this.levelData = levelData
         })
       }
+    }
+  },
+  methods: {
+    flipCard (id) {
+      levelsService.flipCard(id).then(levelData => {
+        this.levelData = levelData
+      })
     }
   }
 }
