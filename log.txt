@@ -47,3 +47,4 @@ java's needed for the selenium driver
 choco install javaruntime
 
 npm test
+
