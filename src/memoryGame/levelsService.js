@@ -9,10 +9,10 @@ const levels = {
 }
 
 function Game (settings) {
-  var cards = {}
-  for (var i = 0; i < settings.numberOfPairs * 2; i++) {
-    var id = i
-    var card = Object.create(settings.deck.cards[Math.floor(i / 2)], {
+  const cards = {}
+  for (let i = 0; i < settings.numberOfPairs * 2; i++) {
+    const id = i
+    const card = Object.create(settings.deck.cards[Math.floor(i / 2)], {
       id: {
         value: id,
         writable: true,
@@ -35,14 +35,14 @@ function Game (settings) {
     cards[id] = card
   }
   function flipCard (id) {
-    var card = cards[id]
+    const card = cards[id]
     card.revealed = true// todo: tie to faceup
     card.faceUp = !card.faceUp
   }
   function getVisibleCards () {
-    var visibleCards = []
-    for (var id in cards) {
-      var card = cards[id]
+    const visibleCards = []
+    for (let id in cards) {
+      const card = cards[id]
       visibleCards.push({
         id: card.id,
         faceUp: card.faceUp,
@@ -58,7 +58,7 @@ function Game (settings) {
   }
 }
 
-var game
+let game
 
 export default {
   startLevel: (levelNumber) => {

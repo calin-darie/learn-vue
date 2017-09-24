@@ -7,8 +7,8 @@ const deck = {
   ],
   back: sprite('back')
 }
-for (var suite of ['spades', 'hearts', 'diamonds', 'clubs']) {
-  for (var rank of ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']) {
+for (let suite of ['spades', 'hearts', 'diamonds', 'clubs']) {
+  for (let rank of ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']) {
     deck.cards.push(card(suite, rank))
   }
 }
@@ -16,7 +16,7 @@ function sprite (id) {
   return `${SpritesFile}#${id}`
 }
 function card (suite, rank) {
-  var id = `${suite}${rank}`
+  const id = `${suite}${rank}`
   return {
     id: id,
     face: {
