@@ -48,3 +48,24 @@ choco install javaruntime
 
 npm test
 
+
+investigating existing memory games in vue
+https://codepen.io/icebob/pen/RRLvAg
+
+
+preparing svg for standard 52 card deck sprites:
+idea of layered sprites with only active sprite visible taken from here:
+http://blogs.sitepointstatic.com/examples/tech/svg-sprites/sprite.html
+scaling issues:
+https://css-tricks.com/scale-svg/
+manually optimized with svoomg. todo: webpack plugin?
+trying to clean&compress svg by reusing rank symbols, and mirroring symmetric figures
+https://stackoverflow.com/questions/10264659/svg-can-i-reference-the-same-element-group-path-instead-of-copying-it-multiple
+https://stackoverflow.com/questions/23899718/scale-and-mirror-svg-object
+
+
+
+card flip explanation
+https://desandro.github.io/3dtransforms/docs/card-flip.html
+and another card flip demo
+http://jsfiddle.net/vals/fSw2E/
