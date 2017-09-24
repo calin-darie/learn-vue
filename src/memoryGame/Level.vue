@@ -1,10 +1,13 @@
 <template>
-  <div>
+  <div class="level">
     test level {{level}}
-    <img class="card" v-for="card of levelData.cards" 
-      :key="card.id" 
-      :src="card.faceUp?card.face:card.back"
-      @click="flipCard(card.id)" />
+
+    <div class="card" v-for="card of levelData.cards" :key="card.id" 
+      :class="{ faceUp: card.faceUp }"
+      @click="flipCard(card.id)">
+      <img class="back side" :src="card.back"/>
+      <img class="face side" :src="card.face" :v-if="card.face"/>
+    </div>
   </div>
 </template>
 
@@ -38,9 +41,33 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .card {
+  transition: 0.7s;
+  position:relative;
+  transform-style: preserve-3d;
+  display: inline-block;
   width: 30px;
+  height: 48.331px;
+}
+
+.card .face {
+  transform: rotateY( 180deg );
+}
+
+.card .side {
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  backface-visibility: hidden;
+}
+
+.card.faceUp{
+  transform: rotateY(180deg);
+}
+
+.level {
+  perspective: 200px;
 }
 </style>
