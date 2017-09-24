@@ -24,12 +24,20 @@ function Game (settings) {
         writable: true,
         configurable: true,
         enumerable: true
+      },
+      revealed: {
+        value: false,
+        writable: true,
+        configurable: true,
+        enumerable: true
       }
     })
     cards[id] = card
   }
   function flipCard (id) {
-    cards[id].faceUp = !cards[id].faceUp
+    var card = cards[id]
+    card.revealed = true// todo: tie to faceup
+    card.faceUp = !card.faceUp
   }
   function getVisibleCards () {
     var visibleCards = []
@@ -39,7 +47,7 @@ function Game (settings) {
         id: card.id,
         faceUp: card.faceUp,
         back: settings.deck.back,
-        face: card.faceUp ? card.face.image : undefined
+        face: card.revealed ? card.face.image : undefined
       })
     }
     return visibleCards
