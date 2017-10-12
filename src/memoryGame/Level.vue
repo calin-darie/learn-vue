@@ -12,30 +12,61 @@
 </template>
 
 <script>
-import levelsService from './levelsService'
+import LevelService from './levelService'
+function debugTime () {
+  let date = new Date()
+  return `${date.getMinutes()}:${date.getSeconds()},${date.getMilliseconds()}`
+}
 export default {
   name: 'level',
   props: ['level'],
   data () {
     return {
-      levelData: { cards: [] }
+      levelData: { cards: [] },
+      pendingUpdates: [],
+      updateIntervalToken: null
     }
   },
   watch: {
     level: {
       immediate: true,
       handler (newLevel) {
-        levelsService.startLevel(this.level).then(levelData => {
-          this.levelData = levelData
+        this.levelService = new LevelService({
+          levelNumber: this.level,
+          update: this.update
         })
+        this.$options.methods = new Proxy(this.levelService, {})
+        this.levelService.start()
       }
     }
   },
   methods: {
-    flipCard (id) {
-      levelsService.flipCard(id).then(levelData => {
-        this.levelData = levelData
-      })
+    flipCard (cardId) { this.levelService.flipCard(cardId) },
+    displayNextUpdate () {
+      let update = this.pendingUpdates.shift()
+      this.levelData = update
+      console.log(`${debugTime()} executing update`, update)
+    },
+    update (newUpdates) {
+      Array.prototype.push.apply(this.pendingUpdates, newUpdates)
+      console.log(`${debugTime()} scheduling ${this.pendingUpdates.length} pending update(s)`)
+      let refresh = () => {
+        if (this.pendingUpdates.length === 0) {
+          clearInterval(this.updateIntervalToken)
+          this.updateIntervalToken = null
+          return false
+        }
+        this.displayNextUpdate()
+        return true
+      }
+      if (this.updateIntervalToken === null) {
+        console.log(`${debugTime()} first refresh of a new interval`)
+        let shouldScheduleNextRefresh = refresh()
+        if (shouldScheduleNextRefresh) {
+          console.log(`${debugTime()} starting new interval`)
+          this.updateIntervalToken = setInterval(refresh, 500)
+        }
+      }
     }
   }
 }
